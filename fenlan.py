@@ -2,22 +2,19 @@
 from __future__ import print_function
 from twython import Twython
 from twython.exceptions import TwythonError
-
+import keys
 
 class TwythonHelper:
 
-    def __init__(self, keyfile):
-        f = open(keyfile)
-        lines = f.readlines()
-        f.close()
-        self.consumerkey = lines[0].strip()
-        self.consumersecret = lines[1].strip()
-        self.accesstoken = lines[2].strip()
-        self.accesssec = lines[3].strip()
+    def __init__(self):
+        self.consumerkey = keys.line1
+        self.consumersecret = keys.line2
+        self.accesstoken = keys.line3
+        self.accesssec = keys.line4
 
         self.api = Twython(self.consumerkey, self.consumersecret, self.accesstoken, self.accesssec)
 
-helper = (TwythonHelper("keys.keys"))
+helper = TwythonHelper()
 api = helper.api
 query = u"芬兰"
 
