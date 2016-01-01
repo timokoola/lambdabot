@@ -4,6 +4,8 @@ from twython import Twython
 from twython.exceptions import TwythonError
 import keys
 
+# inspired by http://joelgrus.com/2015/12/30/polyglot-twitter-bot-part-3-python-27-aws-lambda/
+
 class TwythonHelper:
 
     def __init__(self):
@@ -25,12 +27,8 @@ def handler(event, context):
         if text.startswith("RT"):
         	print("%s is a RT, skipping" % text)
         	continue
-        # re.search matches anywhere in the string; re.I means case-insensitive
         
         print(tweet["text"])
-        # client.retweet will raise an error if we try to retweet a tweet
-        # that we've already retweeted. to avoid having to keep track, we
-        # just use a try/except block
         try:
             api.retweet(id=tweet["id"])
         except TwythonError as e:
